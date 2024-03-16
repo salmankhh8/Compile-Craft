@@ -1,0 +1,45 @@
+<div class="editorParent"  #editorParent>
+    <div class="codeArea" [style.width.px]="leftPaneWidth">
+        <div class="heading">
+            <div class="language">
+                <!-- <div class="text" (click)="dropDownClicked()">
+                    <fa-icon style="margin-right: 5px; color: #EFD81D;" [icon]="fajs"></fa-icon>
+                    Javascript
+                    <fa-icon class="icons" [icon]="faDropDown"></fa-icon>
+                </div> -->
+                <mat-select class="custom-mat-select" placeholder="Contact" (ngModelChange)="dropDownClicked($event)" [(ngModel)]="selectedValue">
+                    <mat-select-trigger class="mat-select-trigger">
+                      <!-- <mat-icon>home/mat-icon>&nbsp;{{ contact.institution }} -->
+                        <fa-icon style="margin-right: 5px;"  [ngStyle]="{'color': selectedValue.active? selectedValue?.color:'#acabab'}" [class]="selectedValue.icon"></fa-icon> 
+                        {{selectedValue.language | titlecase}}
+                    </mat-select-trigger>
+                    <mat-option *ngFor="let item of languageIcons" [value]="item">
+                        <fa-icon style="margin-right: 5px;"  [ngStyle]="{'color': item.active? selectedValue?.color:'#acabab'}" [class]="item.icon"></fa-icon>
+                        {{item.language | titlecase}}
+                    </mat-option>
+                </mat-select>
+                <!-- @if(showLanguagesOptions){
+                        @for (item of languageIcons; track $index) {
+                            <div class="text">
+                                <fa-icon style="margin-right: 5px;"  [ngStyle]="{'color': item.active? item?.color:'#acabab'}" [class]="item.icon"></fa-icon>
+                                {{item.language}}
+                            </div>
+                        }
+                } -->
+            </div>
+            <div class="action">
+                <button (click)="callExecuteCode()"  class="text_Btn action_Btn">Run
+                    <fa-icon style="margin-left: 5px;" [icon]="faCode" ></fa-icon>
+                </button>
+                <button class="text_Btn" (click)="formateCode()">
+                    <fa-icon [icon]="faTerminal"></fa-icon>
+                </button>
+            </div>
+        </div>
+        <app-code [width]="leftPaneWidth" [resizeEditor]="resizeEditor" [language]="this.formData.language" [code]="this.formData.code"  (emitterCode)="codeChanged($event)"></app-code>
+    </div>
+    <button style="cursor: col-resize;" [ngStyle]="{'background-color':(mouseClicked && resizeEditor)?'rgb(19, 122, 212)': ''}" #saperatorBtn class="seperator_Btn" (mousedown)="mouseDown($event)" (mouseenter)="onSeparatorMouseDown($event)" role="separator"></button>
+    <div class="resultarea" [style.width]="rightPaneWidth+'%'">
+        <app-result [result]="compiledResult" [title]="this.formData.question" [question]="this.formData.description" (emitterQuestion)="questionUpdated($event)" (emitterSave)="saveCode()" (emitterTitle)="titleUpdatedFn($event)" ></app-result>
+    </div>
+</div>

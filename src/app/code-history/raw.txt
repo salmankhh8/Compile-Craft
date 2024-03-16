@@ -1,0 +1,66 @@
+<div class="parent">
+<div class="container">
+    <!-- <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+    </mat-form-field> -->
+    <div class="title">Saved Code</div>
+        <div class="mat-elevation-z8" #tableContainer>
+          <table mat-table [dataSource]="dataSource2" matSort>
+      
+            <ng-container matColumnDef="Sno">
+              <th mat-header-cell class="table_s" [ngStyle]="{ 'width.px': '1px' }"  sticky="true" *matHeaderCellDef mat-sort-header> Sno </th>
+              <td mat-cell [style.px]="10" [ngStyle]="{ 'width.px': '1px' }" *matCellDef="let row"> {{row.Sno}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="question">
+              <th mat-header-cell class="table_l" sticky="true" *matHeaderCellDef mat-sort-header> question </th>
+              <td mat-cell *matCellDef="let row"> {{row.question}}</td>
+            </ng-container>
+        
+            <ng-container matColumnDef="title">
+              <th mat-header-cell class="table_m" sticky="true"  *matHeaderCellDef mat-sort-header> Type </th>
+              <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+            </ng-container>
+        
+            <ng-container matColumnDef="language">
+              <th mat-header-cell *matHeaderCellDef sticky="true" class="table_s"  mat-sort-header> language </th>
+              <td mat-cell *matCellDef="let row"> {{row.language}} </td>
+            </ng-container>
+            
+        
+            <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky:true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+            <!-- <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr> -->
+          </table>
+        
+          <mat-paginator class="mat-paginator" [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+        </div>
+  </div>
+  <div class="trending">
+    <div class="title"> <mat-icon class="code" matPrefix aria-hidden="false" fontIcon="trending_up"></mat-icon> Trending Code</div>
+    <div class="trendingQuestion">
+    <mat-list>
+      @for (item of trendingQuestions; track item.question ) {
+        <mat-list-item>
+          <!-- <mat-icon matListItemIcon aria-hidden="false" aria-label="Example home icon" [fontIcon]="item.icon"></mat-icon> -->
+          <div  matListItemTitle>
+            <!-- #FFA500 ,#EFD81D #3776AB -->
+            <fa-icon [styles]="{'color': item.iconObj.color}"  [icon]="item.iconObj.icon"></fa-icon>
+            <div class="content">
+              {{item.question}}
+            </div>
+            <div class="icons">
+              <mat-icon class="code" (click)="linkClicked(item, 'code')"  matIconSuffix aria-hidden="false" aria-label="Example home icon" fontIcon="code"></mat-icon>
+              <!-- <fa-icon style="margin-left: 5px;" [icon]="faCodepen"></fa-icon> -->
+              <mat-icon  class="link" (click)="linkClicked(item, 'redirect')"  matIconSuffix aria-hidden="false" aria-label="Example home icon" fontIcon="link"></mat-icon>
+            </div>
+          </div>
+        </mat-list-item>
+      }
+    </mat-list>
+    </div>
+  </div>
+</div>

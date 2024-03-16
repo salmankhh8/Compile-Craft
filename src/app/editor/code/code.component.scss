@@ -1,0 +1,28 @@
+ngx-monaco-editor{
+    height: 87vh !important;
+    // width: 80%;
+}
+
+::ng-deep.monaco-editor .margin {
+    background-color: #111111 !important;
+}
+
+::ng-deep .monaco-editor-background{
+    background-color: #111111 !important;
+}
+::ng-deep.minimap-decorations-layer{
+    background-color: #11111163 !important;
+}
+
+::ng-deep{
+    .editor{
+        height: 100%;
+       } 
+}
+
+.resizeEditor{
+    position: absolute;
+    height: 86vh;
+    background-color: rgba(88, 88, 88, 0.39);
+    z-index: 10;
+}

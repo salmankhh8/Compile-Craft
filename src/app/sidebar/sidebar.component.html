@@ -1,0 +1,8 @@
+<div class="sidbarParent">
+    <div class="icons">
+        <div class="icon" *ngFor="let item of routesArray; let i=index " (click)="!item.disabled &&routerLinkcliked(i)">
+            <fa-icon [ngClass]="item.active?'active':item.disabled?'disabled':''" [icon]="item.icon"></fa-icon>
+        </div>
+        <!-- <img src="../../assets/icons/code.png" style="width: 20px; background-color: #fff; height: 30px;" alt="" srcset=""> -->
+    </div>
+</div>

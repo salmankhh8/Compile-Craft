@@ -1,0 +1,125 @@
+.editorParent{
+    background-color: rgb(17, 17, 17);
+    height: 100vh;
+    display: flex;
+    width: 100%;
+    font-family: 'Roboto', sans-serif;
+}
+
+.codeArea{
+    width: 60%;
+    padding-top: 25px;
+    padding-left: 15px;
+}
+
+.resultarea{
+    width: 45%;
+    padding-top: 25px;
+    z-index: 100;
+}
+
+::ng-deep.select-overlay-pane{
+    width: fit-content !important;
+    div.mat-mdc-select-panel{
+        background-color: rgb(17, 17, 17);
+        box-shadow: none;
+    }
+    .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text{
+        color: #c2c2c2;
+    }
+    // .mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled):not(.mat-mdc-option-multiple){
+    //     background-color:  #171717;
+    // }
+    .mat-mdc-option .mdc-list-item__primary-text{
+        color: #b9b7b7;
+    }
+    // .mat-mdc-option:hover{
+    //     background-color: #171717;
+    // }
+    .mat-pseudo-checkbox{
+        display: none;
+    }
+}
+::ng-deep.mat-mdc-select-arrow-wrapper {
+    padding-left: 8px;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    padding:0 20px;
+    margin-bottom: 20px;
+    .cdk-overlay-pane{
+        width: fit-content;
+    }
+}
+
+.text{
+    width: auto;
+    padding: 5px 10px;
+    background: rgb(31, 31, 31);
+    border-radius: 8px;
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    // color: #c2c2c2;
+    color: #d9d9d9;
+}
+.mat-select-trigger{
+    color: #c3c3c3;
+}
+.text_Btn{
+    width: 100%;
+    padding: 6px 11px;
+    background-color: rgb(31, 31, 31);
+    border-radius: 8px;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    color: #c2c2c2;
+    border: none;
+}
+.icons{
+    display: none;
+    position: absolute;
+    margin-left: 5px;
+    top: 2px;
+}
+.text:hover{
+    .icons{
+        transition:  2s ease-in-out;
+        transition-delay: 2s;
+        position: relative;
+        display: block;
+    }
+}
+.action{
+    width: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.action button{
+    margin: 0 5px;
+}
+
+.seperator_Btn{
+    z-index: 100;
+    background-color: rgb(62, 62, 62);
+    border: none;
+    padding: 3px;
+}
+
+.seperator_Btn:hover{
+    cursor: col-resize !important;
+    background-color:  rgb(19, 122, 212) !important;
+    width: 5px;
+}
+.action_Btn{
+    color: rgb(0,134,255)
+}

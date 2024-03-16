@@ -1,0 +1,204 @@
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { EditorModule } from '../editor.module';
+import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
+import * as monaco from 'monaco-editor';
+// import { EditorComponent, NGX_MONACO_EDITOR_CONFIG } from 'ngx-monaco-editor-v2';
+import {EditorComponent} from 'ngx-monaco-editor'
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { MonacoEditorModule} from 'ngx-monaco-editor-v2';
+
+@Component({
+  selector: 'app-code',
+  standalone: false,
+  templateUrl: './code.component.html',
+  styleUrl: './code.component.scss'
+})
+export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
+  // editorOptions = {theme: 'vs-dark', language: 'javascript'};
+  // code: string= 'function x() {\nconsole.log("Hello world!");\n}';
+  @Output() emitterCode =new EventEmitter()
+
+  @ViewChild('monacoEdiror', { static: true }) monacoEditor!:ElementRef
+  @ViewChild('editorTemplate', { static: true }) editorTemplate!:ElementRef
+  // monacoEdiror=null
+  @Input() width:any
+
+  @Input() resizeEditor:any 
+
+  resizeEditorAfter:boolean= true
+   onResizing=false
+
+  constructor(private renderer:Renderer2) {
+    console.log(window.innerWidth, window.innerHeight);
+   }
+
+  // theme = 'vs-dark';
+
+  codeModel: CodeModel = {
+    language: 'json',
+    uri: 'main.json',
+    value: '{}'
+  };
+
+  options = {
+    contextmenu: true,
+    minimap: {
+      enabled: true
+    }
+  };
+
+  editorOptions = {
+    theme: 'vs-dark', language: 'javascript',
+    minimap: {
+      enabled: true
+    }
+  };
+  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+  model: any;
+
+  ediorMonaco:any
+
+  ngOnInit(): void {
+    console.log(this.code);
+    
+    setTimeout(()=>{
+      this.emitterCode.emit(this.code)
+      // this.monacoEditor.writeValue(this.width)
+    },0)
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    window.innerHeight= window.innerHeight*1.000001
+    // this.load=false
+    // setTimeout(()=>{
+    //   this.load=true
+    // })
+
+    // this.monacoEdiror._editorContainer.nativeElement.clientWidth=300
+
+    // monaco.editor.create(this.monacoEdiror,{
+    //   theme:'vs-dark',
+    //   language:'javascript',
+    // })
+
+    // let ngxMonaco = document.querySelector<HTMLElement>('ngx-monaco-editor') 
+    // ngxMonaco!.setAttribute('style', `width:${this.width}`)
+
+    // this.monacoEdiror.writeValue(this.renderer.setProperty( , 'width',this.width))
+
+    // const element = this.monacoEdiror.nativeElement as HTMLElement
+    // this.renderer.setStyle(element, 'width', this.width)
+    // monaco.editor.create(this.monacoEdiror!,)
+    // this.monacoEdiror.layout()
+
+    if(this.resizeEditor){
+      this.onResizing=true
+  // b[0].style.zIndex="-1"
+    }
+    else{
+      // b[0].style.zIndex="1"
+      if(this.onResizing){
+        this.resizeEditorAfter=false
+        setTimeout(()=>{
+          this.resizeEditorAfter=true
+        },1)
+      }
+    }
+
+    console.log(this.resizeEditorAfter);
+    
+  }
+
+  // @HostListener('window:resize', ['$event'])
+  // onResize(event:Event){
+  //   // console.log(window.innerWidth, window.innerHeight);
+  //   let height =window.innerHeight
+  // }
+
+  changeLayoutFn(){
+  //  if(this.monacoEdirr.nativeElement){
+
+  // this.monacoEditor._editorContainer.nativeElement
+  // this.renderer.setStyle(this.monacoEditor._editorContainer.nativeElement, 'width', this.width)\
+  // let a= document.getElementsByClassName('editor-container') as HTMLCollectionOf<HTMLElement>
+  // let b= document.getElementsByClassName('monaco-editor')as HTMLCollectionOf<HTMLElement>
+  // let c= document.getElementsByClassName('overflow-guard')as HTMLCollectionOf<HTMLElement>
+  // let d= document.getElementsByClassName('monaco-scrollable-element')as HTMLCollectionOf<HTMLElement>
+  // let d1= document.getElementsByClassName('editor-scrollable')as HTMLCollectionOf<HTMLElement>
+  // let e= document.getElementsByClassName('monaco-mouse-cursor-text')as HTMLCollectionOf<HTMLElement>
+  // let f= document.getElementsByClassName('minimap slider-mouseover')as HTMLCollectionOf<HTMLElement>
+  // let g= document.getElementsByClassName('view-overlays')as HTMLCollectionOf<HTMLElement>
+  // let i= document.getElementsByClassName('current-line')as HTMLCollectionOf<HTMLElement>
+  // a[0].style.width=this.width
+  // b[0].style.width =this.width+'px'
+  // c[0].style.width=this.width+'px'
+  // d[0].style.width = (this.width-64)+ 'px'
+  // g[0].style.width= (this.width-64)+ 'px'
+  // e[0].style.width= (this.width- 34) + 'px'
+  // f[0].style.left= (this.width*0.9)+'px'
+  // i[0].style.left = (this.width-64) + 'px'  
+  // console.log(b[0]);
+
+  // 1000px left 906 x width 80px
+
+  // left ration 90%
+
+  // width ration0.08%
+
+  // 500px left 445px eidth 41px 
+  
+
+   }
+
+
+
+  ngAfterViewInit(): void {
+    // console.log(
+    //   this.monacoEditor.nativeElement
+    // );
+    this.updateCode()
+    // monaco.editor.defineTheme('dark-custom',{
+    //   base: 'vs-dark',
+    //   inherit: true,
+    //   rules: [
+    //     { token: '',background: '#111111' },
+    //   ],
+    //   colors: {
+    //     "editor.background": '#ff0000',
+    //   }
+    // })
+    // monaco.editor.layout()
+    // this.ediorMonaco=monaco.editor.create(this.monacoEdiror.nativeElement,{
+    //   language:'javascript',
+    //   value: "var x = 0;",
+    //   theme:"vs-dark",
+    //   automaticLayout: false
+    // })
+    let code= `<ngx-monaco-editor #monacoEdiror [options]="editorOptions" [(ngModel)]="code"  [style.width.px]="width" [style]="{'height':'90vh'}"></ngx-monaco-editor>`
+    let code2= `<p>this is a paragraoh</P>`
+    // this.editorTemplate.nativeElement.innerHTML=code2
+  }
+
+  updateCode(){
+    // let codeEditor=   monaco.editor.create(this.monacoEditor.nativeElement,{
+    //   language:'javascript',
+    //   value: this.code,
+    //   theme:"vs-dark",
+    //   automaticLayout: true
+    // })
+
+    // let input = codeEditor.getValue()
+
+    // console.log(input, "input twext value");
+    
+  //  monaco.editor.getModel(this.monacoEditor.nativeElement)!.onDidChangeContent((event) => {
+  //     console.log(event, "event");
+  //   });
+  }
+
+  onCodeChanged(value: any) {
+    this.emitterCode.emit(value)
+  }
+
+}
+

@@ -1,0 +1,21 @@
+<!-- <div class="parent">
+  <div class="codeComponent"></div>
+  <button role="separator" class="seperator"></button>
+  <div class="resultComponent"></div>
+</div> -->
+
+<!-- <div class="container">
+  <div class="cell" [style.width.px]="cell1Width">{{ cell1Content }}</div>
+  <div class="separator" (mousedown)="onMouseDown($event)"></div>
+  <div class="cell" [style.flex-grow]="1 - cell1Width / totalWidth" (mouseup)="onMouseUp()">
+    {{ cell2Content }}
+  </div>
+</div> -->
+<div class="parentContainer">
+  <div class="sidebar">
+    <app-sidebar></app-sidebar>
+  </div>
+  <div class="editorContainer">
+    <router-outlet></router-outlet>
+  </div>
+</div>

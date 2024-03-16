@@ -1,0 +1,32 @@
+.sidebarParent{
+    display: flex;
+    // justify-content: center;
+    width: 100%;
+    align-items: center;
+}
+.icons{
+    display: flex ;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 30px;
+    margin: 0 auto;
+    color: #acacac;
+    .icon{
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        cursor: pointer;
+    }
+    .active{
+        // color: rgb(103,65,217);
+        color: rgb(0,134,255)
+
+    }
+    .disabled{
+        color: #595454;
+    }
+}
+.image{
+    color: #fff;
+    font-size: 18px;
+}

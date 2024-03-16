@@ -1,0 +1,43 @@
+<div class="resultParent">
+    <div class="questions_heading">
+        <div class="question_area">
+            <div class="leftSection">
+                <div class="text_Btn">Questions</div>
+            </div>
+            <div class="rightSection">
+                <div class="pretify">
+                    <button class="text_Btn" (click)="saveClicked()">
+                        Save
+                        <fa-icon style="margin-left: 5px;" [icon]="faSave"></fa-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div >
+            <input  [(ngModel)]="title"  (ngModelChange)="titleUpdatedFn($event)" type="text" class="questionTitle" placeholder="Please write title">
+            <textarea [(ngModel)]="question" (ngModelChange)="questionUpdateFn($event)" placeholder="Please Write Your Question Description.." class="questionTextArea" name="questions" id="questions" cols="30" rows="10"></textarea>
+            <!-- {{resultCode}} -->
+        </div>
+    </div>
+    <div class="heading">
+        <div class="question_area">
+        <div class="leftSection">
+            <button  class="text_Btn">
+            Result!
+            </button>
+        </div>
+        <div class="rightSection">
+            <div class="pretify">
+                <button class="text_Btn">
+                    Copy
+                    <fa-icon style="margin-left: 5px;" [icon]="faCopy"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+        <div class="codeResults" [innerText]="resultCode?resultCode:'Awaiting Result...'">
+            <!-- {{resultCode}} -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="code" [style.width.px]="width" style="position: relative;">
+<!-- <div #monacoEdiror [style]="{'width':width, 'height':'90vh'}" ></div> -->
+<!-- <div class="action">
+    <button (click)="formate()">Formate</button>
+</div> -->
+<div class="code_editor" [style.width.px]="width">
+    <div  [ngClass]="{'resizeEditor': resizeEditor}" [style.width.px]="width"></div>
+    <ng-container *ngIf="resizeEditorAfter">
+        <ngx-monaco-editor #monacoEdiror   (ngModelChange)="onCodeChanged($event)" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+    </ng-container>
+</div>
+
+<div #editorTemplate></div>
+</div>
