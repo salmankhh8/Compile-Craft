@@ -17,8 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/js-compiler-frontend",
-            "index": "src/index.html",
+            "outputPath": "docs",
+            "index": "index.html",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
