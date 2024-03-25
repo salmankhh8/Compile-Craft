@@ -18,6 +18,10 @@
     z-index: 100;
 }
 
+.language{
+    display: flex;
+}
+
 ::ng-deep.select-overlay-pane{
     width: fit-content !important;
     div.mat-mdc-select-panel{
@@ -117,9 +121,15 @@
 
 .seperator_Btn:hover{
     cursor: col-resize !important;
-    background-color:  rgb(19, 122, 212) !important;
+    background-color:  #137ad4 !important;
     width: 5px;
 }
 .action_Btn{
     color: rgb(0,134,255)
+}
+
+::ng-deep .codeSnackBar{
+    --mdc-snackbar-container-color: #858585;
+//   --mat-mdc-snack-bar-button-color: yellow;
+  --mdc-snackbar-supporting-text-color: #151515;
 }

@@ -1,19 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { codeHistoryModel, trendQuestionModel } from '../models/codeHisstory.model';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodeHistoryService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient) { 
+
+  }
+
+  codeList:codeHistoryModel[]=[]
 
   getDummyDataCode():Observable<codeHistoryModel>{
-    // return dummyData
+
     return this.http.get<codeHistoryModel>('../../assets/sampleData/sample.json')
-    // D:\practise\Javascript_compile_project\jsCompilerFrontend\src\assets\sampleData\sample.json
+    let data:any = (localStorage.getItem('codeList'))
+    // return data
+    if( typeof data == 'string'){
+      data= JSON.parse(data)
+    }
+    return of(data)
+  }
+
+  saveCodeHistory(data:any){
+    let savedData= localStorage.getItem('codeList')
+    if(savedData==null){
+      this.codeList.push(data)
+      localStorage.setItem('codeList', JSON.stringify(this.codeList))
+    }
+    if( typeof savedData == 'string'){
+      savedData = JSON.parse(savedData)
+      this.checkDataExist(savedData, data)
+    }
+
+    return true
   }
 
   getDummyTrendingQuestion():Observable<trendQuestionModel>{
@@ -26,5 +49,21 @@ export class CodeHistoryService {
   
   getDailyCodeLogs(){
     return this.http.get("../../assets/sampleData/workingHourLogs.json")
+  }
+
+  checkDataExist(savedData:any, data:any){
+
+    let index = savedData.findIndex((item:any)=> item.id == data.id)
+
+    if(index!== -1){ // if data exist
+      savedData[index]=data
+      return true
+    }
+    else { // if data not exist 
+      savedData.push(data)
+      localStorage.setItem('codeList', JSON.stringify(savedData, null, 2))
+      return true
+    }
+
   }
 }

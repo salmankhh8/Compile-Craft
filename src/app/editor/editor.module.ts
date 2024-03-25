@@ -11,6 +11,12 @@ import { CompilerService } from '../compiler.service';
 import { HttpClientModule } from '@angular/common/http';
 import { MonacoCodeComponent } from './code/monaco-code/monaco-code.component';
 import { MatSelectModule } from '@angular/material/select';
+import { MessageComponent } from '../message/message.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+import { CommonPopupComponent } from '../common-popup/common-popup.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+
 // import {MonacoEditorModule, NgxMonacoEditorConfig} from 'ngx-monaco-editor'
 
 const monacoConfig: NgxMonacoEditorConfig = {
@@ -24,7 +30,8 @@ const monacoConfig: NgxMonacoEditorConfig = {
 
 
 @NgModule({
-  declarations: [CodeComponent, ResultComponent, MonacoCodeComponent],
+    
+    declarations: [CodeComponent, ResultComponent, MonacoCodeComponent, MessageComponent, CommonPopupComponent ],
   imports: [
     FormsModule,
     FontAwesomeModule,
@@ -32,10 +39,13 @@ const monacoConfig: NgxMonacoEditorConfig = {
     MonacoEditorModule.forRoot(monacoConfig),
     HttpClientModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatSnackBarModule
     // MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers:[CompilerService],
-    exports:[CodeComponent,ResultComponent, CommonModule, FontAwesomeModule,FormsModule, MatSelectModule]
+    exports:[CodeComponent,ResultComponent, CommonModule, FontAwesomeModule,FormsModule, MatSelectModule, MatDialogModule,MatSnackBarModule]
 })
 export class EditorModule { }

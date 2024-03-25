@@ -5,6 +5,9 @@
 </div> -->
 <div class="code_editor" [style.width.px]="width">
     <div  [ngClass]="{'resizeEditor': resizeEditor}" [style.width.px]="width"></div>
+    <div class="message" *ngIf="this.errorField">
+        <app-message [leftArrow]="true" [message]="this.errorField" (closeErrorBox)="closeDialogBox('code')"></app-message>
+    </div>
     <ng-container *ngIf="resizeEditorAfter">
         <ngx-monaco-editor #monacoEdiror   (ngModelChange)="onCodeChanged($event)" [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
     </ng-container>

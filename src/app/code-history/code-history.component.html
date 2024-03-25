@@ -5,25 +5,34 @@
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
       </mat-form-field> -->
     <div class="title">
-       <!-- <mat-icon class="code" matPrefix aria-hidden="false" fontIcon="deployed_code"></mat-icon> -->
-       <img class="avg_pace" src="../../assets/icons/deployed_code_FILL0_wght400_GRAD0_opsz24.svg" alt="">
+      <!-- <mat-icon class="code" matPrefix aria-hidden="false" fontIcon="deployed_code"></mat-icon> -->
+      <div class="iconCircle">
+        <svg xmlns="http://www.w3.org/2000/svg" height="18" fill="#acabab" viewBox="0 -960 960 960" width="18"><path d="M440-183v-274L200-596v274l240 139Zm80 0 240-139v-274L520-457v274Zm-40-343 237-137-237-137-237 137 237 137ZM160-252q-19-11-29.5-29T120-321v-318q0-22 10.5-40t29.5-29l280-161q19-11 40-11t40 11l280 161q19 11 29.5 29t10.5 40v318q0 22-10.5 40T800-252L520-91q-19 11-40 11t-40-11L160-252Zm320-228Z"/></svg>
+        <div class="curve-border"></div>
+        <div class="horizontalLine"></div>
+        </div>
        Saved Code</div>
     <div class="mat-elevation-z8" #tableContainer>
       <table mat-table [dataSource]="dataSource2" matSort>
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell class="table_m" sticky="true" *matHeaderCellDef mat-sort-header> {{'Title' | titlecase}} </th>
+          <td mat-cell *matCellDef="let row"> {{row.title}} </td>
+        </ng-container>
 
         <ng-container matColumnDef="question">
           <th mat-header-cell class="table_l" sticky="true" *matHeaderCellDef mat-sort-header> {{'question' | titlecase}} </th>
           <td mat-cell *matCellDef="let row"> {{row.question}}</td>
         </ng-container>
 
-        <ng-container matColumnDef="title">
+        <!-- <ng-container matColumnDef="description">
           <th mat-header-cell class="table_m" sticky="true" *matHeaderCellDef mat-sort-header> {{'Type' | titlecase}} </th>
-          <td mat-cell *matCellDef="let row"> {{row.title}} </td>
-        </ng-container>
+          <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+        </ng-container> -->
 
         <ng-container matColumnDef="language">
           <th mat-header-cell *matHeaderCellDef sticky="true" mat-sort-header> {{'language'| titlecase}} </th>
-          <td mat-cell *matCellDef="let row"> <fa-icon style="display: flex; justify-content: space-around; font-size: large; " [style]="{'color': row.iconObj.color}" [class]="row.iconObj.icon"></fa-icon></td>
+          <td mat-cell *matCellDef="let row"> <fa-icon style="display: flex; justify-content: left; font-size: large; padding-left: 25px;" [style]="{'color': row.iconObj.color}" [class]="row.iconObj.icon"></fa-icon></td>
         </ng-container>
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef sticky="true" > {{'action'| titlecase}} </th>
@@ -42,28 +51,41 @@
         aria-label="Select page of users"></mat-paginator>
     </div>
   </div>
-  <div class="borer"></div>
   <div class="rightPlane">
+    <div class="verticalCurve"></div>
+    <div class="verticalLine">
+    </div>
     <div class="bottomRight">
       <div class="trendingBarChart">
         <div class="title">
+          <div class="iconCircle">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18" fill="#acabab" viewBox="0 -960 960 960" width="18"><path d="M610-760q-21 0-35.5-14.5T560-810q0-21 14.5-35.5T610-860q21 0 35.5 14.5T660-810q0 21-14.5 35.5T610-760Zm0 660q-21 0-35.5-14.5T560-150q0-21 14.5-35.5T610-200q21 0 35.5 14.5T660-150q0 21-14.5 35.5T610-100Zm160-520q-21 0-35.5-14.5T720-670q0-21 14.5-35.5T770-720q21 0 35.5 14.5T820-670q0 21-14.5 35.5T770-620Zm0 380q-21 0-35.5-14.5T720-290q0-21 14.5-35.5T770-340q21 0 35.5 14.5T820-290q0 21-14.5 35.5T770-240Zm60-190q-21 0-35.5-14.5T780-480q0-21 14.5-35.5T830-530q21 0 35.5 14.5T880-480q0 21-14.5 35.5T830-430ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880v80q-134 0-227 93t-93 227q0 134 93 227t227 93v80Zm0-320q-33 0-56.5-23.5T400-480q0-5 .5-10.5T403-501l-83-83 56-56 83 83q4-1 21-3 33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Z"/></svg>
+            <div class="curve-border2"></div>
+            </div>
            <!-- <mat-icon class="code" matPrefix aria-hidden="false" fontIcon="avg_pace"></mat-icon> -->
-           <img class="avg_pace" src="../../assets/icons/avg_pace_FILL0_wght400_GRAD0_opsz24.svg" alt="">
-          Daily Analysis</div>
+           <!-- <img class="avg_pace" src="../../assets/icons/avg_pace_FILL0_wght400_GRAD0_opsz24.svg" alt=""> -->
+          Daily Analysis
+        </div>
         <div class="chart">
           <apx-chart #chart [series]="lineChartSeries" [chart]="lineChartOptions.chart" [labels]="lineChartOptions.annotations"
            [dataLabels]="lineChartOptions.dataLabels" [fill]="lineChartOptions.fill" [tooltip]="lineChartOptions.tooltip" [yaxis]="lineChartOptions.yaxis"
            [xaxis]="lineChartOptions.xaxis"
-          [responsive]="lineChartOptions.responsive" [stroke]="lineChartOptions.stroke" [grid]="lineChartOptions.grid"
-          [legend]="lineChartOptions.legend"></apx-chart>
+           [responsive]="lineChartOptions.responsive" [stroke]="lineChartOptions.stroke" [grid]="lineChartOptions.grid"
+           [legend]="lineChartOptions.legend">
+         </apx-chart>
         </div>   
       </div>
     </div>
-    <div class="rightMidBorder"></div>
     <div class="topRight">
+      <div class="horizontalLine"></div>
+      <div class="curve-border2 curve-border3"></div>
       <div class="trendingList">
         <div class="title"> 
-          <mat-icon class="code" matPrefix aria-hidden="false" fontIcon="trending_up"></mat-icon>
+          <div class="iconCircle">
+            <!-- <mat-icon class="code" matPrefix aria-hidden="false" fontIcon="trending_up"></mat-icon> -->
+            <svg xmlns="http://www.w3.org/2000/svg" height="18" fill="#acabab" viewBox="0 -960 960 960" width="18"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z"/></svg>
+            <div class="curve-border2"></div>
+            </div>
           Trending Code</div>
         <div class="trendingQuestion">
           <mat-list>
@@ -90,7 +112,14 @@
         </div>
       </div>
       <div class="pieChart" *ngIf="isChartLoaded">
-        <div class="title"> <mat-icon class="code">analytics</mat-icon>
+        <div class="title">
+           <!-- <mat-icon class="code">analytics</mat-icon> -->
+           <div class="iconCircle">
+            <!-- <mat-icon class="code" matPrefix aria-hidden="false" fontIcon="trending_up"></mat-icon> -->
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" height="18" fill="#acabab" viewBox="0 -960 960 960" width="18"><path d="m136-240-56-56 296-298 160 160 208-206H640v-80h240v240h-80v-104L536-320 376-480 136-240Z"/></svg> -->
+            <!-- <svg xmlns="http://www.w3.org/2000/svg" height="18" fill="#acabab" viewBox="0 -960 960 960" width="18"><path d="M280-280h80v-200h-80v200Zm320 0h80v-400h-80v400Zm-160 0h80v-120h-80v120Zm0-200h80v-80h-80v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm0-80h560v-560H200v560Zm0-560v560-560Z"/></svg> -->
+            <svg xmlns="http://www.w3.org/2000/svg" height="18" fill="#acabab" viewBox="0 -960 960 960" width="18"><path d="M640-160v-280h160v280H640Zm-240 0v-640h160v640H400Zm-240 0v-440h160v440H160Z"/></svg>
+            <div class="curve-border4"></div>            </div>
           DSA Analysis</div>
           <div class="chart">
             <apx-chart #chart [series]="chartOptions.series" [chart]="chartOptions.chart" [labels]="chartOptions.labels"

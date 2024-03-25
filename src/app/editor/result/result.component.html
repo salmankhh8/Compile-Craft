@@ -2,7 +2,7 @@
     <div class="questions_heading">
         <div class="question_area">
             <div class="leftSection">
-                <div class="text_Btn">Questions</div>
+                <div>Questions</div>
             </div>
             <div class="rightSection">
                 <div class="pretify">
@@ -14,21 +14,30 @@
             </div>
         </div>
         <div >
-            <input  [(ngModel)]="title"  (ngModelChange)="titleUpdatedFn($event)" type="text" class="questionTitle" placeholder="Please write title">
-            <textarea [(ngModel)]="question" (ngModelChange)="questionUpdateFn($event)" placeholder="Please Write Your Question Description.." class="questionTextArea" name="questions" id="questions" cols="30" rows="10"></textarea>
+            <div class="inputQuestion" style="position: relative; display: flex; align-items: center;">
+                <div class="message" *ngIf="this.fieldMessage['question']">
+                    <app-message [message]="this.fieldMessage['question']" (closeErrorBox)="closeDialogBox('question')"></app-message>
+                </div>
+                <input  [(ngModel)]="title"  (ngModelChange)="titleUpdatedFn($event)" type="text" class="questionTitle" placeholder="Please write title">
+            </div>
+            <div class="questionArea" style="position: relative; display: flex; align-items: center;">
+                <div class="message" *ngIf="this.fieldMessage['description']">
+                    <app-message [message]="this.fieldMessage['description']" (closeErrorBox)="closeDialogBox('description')" ></app-message>
+                </div>
+                <textarea [(ngModel)]="question" (ngModelChange)="questionUpdateFn($event)" placeholder="Please Write Your Question Description.." class="questionTextArea" name="questions" id="questions" cols="30" rows="10"></textarea>
+            </div>
             <!-- {{resultCode}} -->
         </div>
     </div>
+    <div class="border"></div>
     <div class="heading">
         <div class="question_area">
         <div class="leftSection">
-            <button  class="text_Btn">
             Result!
-            </button>
         </div>
         <div class="rightSection">
             <div class="pretify">
-                <button class="text_Btn">
+                <button class="text_Btn" (click)="copyResult()">
                     Copy
                     <fa-icon style="margin-left: 5px;" [icon]="faCopy"></fa-icon>
                 </button>

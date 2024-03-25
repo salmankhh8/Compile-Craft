@@ -27,6 +27,77 @@
   -webkit-border-radius: 16px;
 }
 
+.curve-border {
+  // position: absolute;
+  // width: 100px;
+  // height: 100px;
+  // border-right: 1px solid transparent;
+  // border-bottom: 4px solid rgb(56, 71, 212);
+  // border-left: 1px solid transparent;
+  // border-top: 1px solid transparent;
+  // border-radius: 50px;
+  // transform: rotate(45deg);
+  // z-index: 1000
+
+  // position: absolute;
+  // width: 28px;
+  // top: 5%;
+  // height: 31px;
+  // left: 3%;
+  // border-right: 4px solid transparent;
+  // border-bottom: 4px solid rgb(56, 71, 212);
+  // border-left: 4px solid transparent;
+  // border-top: 4px solid transparent;
+  // border-radius: 50px;
+  // transform: rotate(45deg);
+  // z-index: 1000;
+
+  position: absolute;
+  width: 27px;
+  top: 22.4%;
+  height: 38px;
+  left: 29px;
+  border-right: 3px solid transparent;
+  border-bottom: 3px solid #6c30a8;
+  border-left: 3px solid transparent;
+  border-top: 3px solid transparent;
+  border-radius: 50px;
+  transform: rotate(43deg);
+  z-index: 1000;
+
+      // position: absolute;
+    // width: 26px;
+    // top: 43.4%;
+    // height: 26.6px;
+    // left: -1px;
+    // border-right: 3px solid #6c30a8;
+    // border-bottom: 3px solid transparent;
+    // border-left: 3px solid transparent;
+    // border-top: 3px solid transparent;
+    // border-radius: 50px;
+    // transform: rotate(43deg);
+    // z-index: 1000;
+}
+
+.horizontalLine{
+  width: 98.3%;
+  position: absolute;
+  top: 103.5%;
+  left: 41px;
+  z-index: 10000;
+  border-bottom: 2.7px solid #663399;
+
+  
+  // width: 109.7%;
+  // position: absolute;
+  // top: 103.5%;
+  // left: -20px;
+  // z-index: 10000;
+  // border-bottom: 2.7px solid #663399;
+}
+
+
+
 
 .parent {
   background-color: rgb(17, 17, 17);
@@ -62,10 +133,19 @@
   width: 50%;
   // height: 99vh;
   padding: 15px 10px;
-
+  box-sizing: border-box;
   // padding-top: 25px;
   // padding-left: 15px;
 
+  .iconCircle{
+    border-radius: 50%;
+    padding: 2px;
+    border: 2px solid rebeccapurple;
+    /* height: 25px; */
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+  }
 
   table {
     width: 100%;
@@ -193,6 +273,7 @@
   font-size: 1.5rem;
   display: flex;
   align-items: center;
+  position: relative;
   mat-icon{
     margin-right: 10px;
   }
@@ -206,18 +287,79 @@
   height: 94vh;
   position: relative;
   padding: 15px 10px;
+  .verticalLine{
+    position: absolute;
+    border-left: 3px solid rebeccapurple;
+    height: 35%;
+    top: 94px;
+  }
+  .verticalCurve{
+    position: absolute;
+    width: 55px;
+    top: 65px;
+    height: 57px;
+    left: -48.5px;
+    border-right: 3px solid transparent;
+    border-bottom: 3px solid #6c30a8;
+    border-left: 3px solid transparent;
+    border-top: 3px solid transparent;
+    border-radius: 50px;
+    transform: rotate(228deg);
+    z-index: 1000;
+  }
+  .iconCircle{
+    border-radius: 50%;
+    padding: 2px;
+    border: 2px solid rebeccapurple;
+    /* height: 25px; */
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+  }
   .topRight {
     display: flex;
     height: 50%;
     width: 100%;
-
+    position: relative;
+    .curve-border2{
+      position: absolute;
+      width: 38px;
+      top: -33.6%;
+      height: 37px;
+      left: -5px;
+      border-right: 3px solid transparent;
+      border-bottom: 3px solid #6c30a8;
+      border-left: 3px solid transparent;
+      border-top: 3px solid transparent;
+      border-radius: 50px;
+      transform: rotate(47deg);
+      z-index: 1000;
+    }
+    .horizontalLine{
+      width: 51.5%;
+      position: absolute;
+      top: 2.7%;
+      left: 20px;
+      z-index: 10000;
+      border-bottom: 2.7px solid #663399;
+    }
+    .curve-border3{
+      top: -11.6%;
+      left: 0px;
+    }
     .trendingList {
       border-radius: 20px;
       width: 50%;
       padding: 15px 10px 15px 5px;
-
       // background: #171717;
-
+        .iconCircle3{
+          border-radius: 50%;
+          padding: 2px;
+          border: 2px solid rebeccapurple;
+          /* height: 25px; */
+          display: flex;
+          align-items: center;
+      }
       .trendingQuestion {
         height: 80%;
         overflow-y: hidden;
@@ -374,6 +516,21 @@
     .pieChart {
       width: 45%;
       padding: 15px 10px 15px 5px;
+      .curve-border4{
+        position: absolute;
+        width: 36px;
+        top: -15.6%;
+        height: 37px;
+        left: -13px;
+        border-right: 3px solid transparent;
+        border-bottom: 3px solid #6c30a8;
+        border-left: 3px solid transparent;
+        border-top: 3px solid transparent;
+        border-radius: 50px;
+        transform: rotate(224deg);
+        z-index: 1000;
+
+      }
       .icons {
         display: flex;
         justify-content: space-around;
@@ -395,11 +552,25 @@
 
   .bottomRight {
     width: 100%;
+    position: relative;
     height: auto;
-
     .trendingBarChart {
+      position: relative;
       margin: 0 auto;
-
+      .curve-border2{
+        position: absolute;
+        width: 27px;
+        top: 24.4%;
+        height: 37px;
+        left: -8px;
+        border-right: 3px solid transparent;
+        border-bottom: 3px solid #6c30a8;
+        border-left: 3px solid transparent;
+        border-top: 3px solid transparent;
+        border-radius: 50px;
+        transform: rotate(318deg);
+        z-index: 1000;
+      }
       .avg_pace {
         fill: #acabab;
       }

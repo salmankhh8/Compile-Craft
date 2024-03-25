@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faAngleDown, faTerminal, faCode } from '@fortawesome/free-solid-svg-icons';
 import { faJs } from '@fortawesome/free-brands-svg-icons';
+import { faFileCode } from '@fortawesome/free-regular-svg-icons'
 import { EditorModule } from './editor.module';
 import { CompilerService } from '../compiler.service';
 import e from 'express';
@@ -12,6 +13,11 @@ import { NavigationEnd, Router } from '@angular/router';
 import { CodeHistoryService } from '../service/code-history.service';
 import { trendQuestionModel } from '../models/codeHisstory.model';
 import { MAT_SELECT_CONFIG, MatSelectModule } from '@angular/material/select';
+import { MatDialog } from '@angular/material/dialog';
+import { CommonPopupComponent } from '../common-popup/common-popup.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+// import { js_beautify } from 'js-beautify';
+import { JSBeautifyOptions, js_beautify } from 'js-beautify'
 // import { LanguageIcons } from '../code-history/code-history.component';
 
 
@@ -28,10 +34,8 @@ export interface FormData {
   id: string,
   question: string,
   description: string,
-  link: string,
   language: string,
   code: string,
-  title: string
 }
 @Component({
   selector: 'app-editor',
@@ -50,7 +54,7 @@ export interface FormData {
 
 export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
 
-  constructor(private compileService: CompilerService, private fb: FormBuilder, private router: Router, private codeHistory: CodeHistoryService) {
+  constructor(private compileService: CompilerService, private fb: FormBuilder, private router: Router, private codeHistory: CodeHistoryService, private dialog: MatDialog, private _snackBar: MatSnackBar) {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
         console.log(event);
@@ -60,28 +64,30 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
             this.callQuestionDeatiails(this.codeRequestedId)
           }
         }
-        if (event.urlAfterRedirects.split("/")[1] == "savedCode") {
+        else if (event.urlAfterRedirects.split("/")[1] == "savedCode") {
           this.codeRequestedId = event.urlAfterRedirects.split("/")[2]
           if (this.codeRequestedId) {
             this.callDummySavedData(this.codeRequestedId)
           }
         }
 
-        if (event.urlAfterRedirects.split("/")[1] == "home" && localStorage.getItem("codeData")) {
+        else if (event.urlAfterRedirects.split("/")[1] == "home" && localStorage.getItem("codeData")) {
           this.mapFormValues(localStorage.getItem("codeData"))
+        }
+        else {
+          this.languageIcons[0].active = true
+          this.selectedValue = this.languageIcons[0]
+          this.formData.language = this.languageIcons[0].language
         }
       }
 
     })
-
-    this.languageIcons[0].active = true
-    this.selectedValue = this.languageIcons[0]
-    this.formData.language = this.languageIcons[0].language
   }
   faDropDown = faAngleDown
   faTerminal = faTerminal
   fajs = faJs
   faCode = faCode
+  faFileCode = faFileCode
   leftPaneWidth: any
   rightPaneWidth: any
   compileCode: any
@@ -119,11 +125,11 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
     id: "",
     question: "",
     description: "",
-    link: "",
     language: "",
     code: "",
-    title: ""
   }
+
+  errorArray: { [key: string]: any } = {}
 
   @ViewChild('editorParent') editorWidth!: ElementRef
   @ViewChild('saperatorBtn') saperatorBtn!: ElementRef
@@ -169,11 +175,55 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
       this.mapFormValues(data)
     }
   }
+  deleteCode() {
+    const dialogRef = this.dialog.open(CommonPopupComponent, {
+      width: '400px',
+      height: '120px',
+      data: {
+        title: "Delete Will result in lost of Changes without save",
+        actionButton: [
+          {
+            "text": "Cancel",
+            "icon": "fa-xmark",
+            "action": "cancel",
+            "style": "style1"
+          },
+          {
+            "text": "Save and Clear",
+            "icon": "fa-floppy-disk",
+            "action": "save",
+            "style": "style2"
+          },
+          {
+            "text": "Delete",
+            "icon": "fa-trash",
+            "action": "Delete",
+            "style": "style3"
+          },
+        ]
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(action => {
+      // console.log('The dialog was closed', action);
+      if (action == 'save') {
+        this.saveCode('saveDelete')
+      }
+      // else if(action=='cancel'){
+      // }
+      else if (action = 'delete') {
+        this.clearFormData()
+      }
+    });
+  }
+
+  clearFormData(action?: any) {
+    const emptyData: FormData = Object.keys(this.formData).reduce((acc, curr) => ({ ...acc, [curr]: "" }), {} as FormData)
+    this.formData = emptyData
+    localStorage.removeItem('codeData')
+  }
 
   mapIconswithLanguage(language: any) {
-    if (language == 'js') {
-      language = 'javascript'
-    }
     return this.languageIcons.find((item: any) => {
       if (item.language == language) {
         return item.active = true
@@ -192,6 +242,9 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
         console.error("Error parsing JSON data:", error);
         return;
       }
+    }
+    if (data.language == "") {
+      data.language = this.languageIcons[0].language
     }
     this.formData = Object.assign({}, data);
     this.selectedValue = this.mapIconswithLanguage(data.language)
@@ -216,31 +269,70 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
     this.formData.question = $event
   }
 
-  saveCode() {
+  saveCode(action?: string) {
     console.log("save all the results", this.formData);
+
+
+    if (!this.formData.id) {
+      this.formData.id = (Date.now().toString(36) + Math.random().toString(36).substring(2, 5));
+    }
+    const fieldValue = this.checkFormField()
+
+    if (fieldValue.length > 0) {
+      console.log(fieldValue);
+      fieldValue.forEach(field => {
+        this.erroFunc(field)
+        return
+      })
+    }
+    else {
+      let savedCompleted = this.codeHistory.saveCodeHistory(this.formData)
+      this.openSnackBar("Saved Successfully", "Hide")
+      if (savedCompleted && action) this.clearFormData(action)
+    }
+  }
+
+  checkFormField() {
     const emptyFields: string[] = Object.keys(this.formData)
       .filter(key => !(this.formData as any)[key].trim())
       .map(key => key);
 
-    if (emptyFields.length > 0) {
-      console.log(emptyFields);
+    return emptyFields
+  }
 
+  erroFunc(field: any) {
+    let errorbj = {
+      field,
+      error: `${field} can't be empty !`,
     }
+    this.errorArray[field] = errorbj.error
+  }
+
+  closeDialogBox(field: any) {
+    console.log(field);
+    // this.errorArray['filter']((item:any, index:any)=>console.log(item, "inside close box function"))
+    delete this.errorArray[field]
   }
 
   callExecuteCode() {
     let regexedCode = this.matchRegexexpr(this.compileCode)
-
     this.compileService.executeCodeAPI(regexedCode, this.formData.language).subscribe((res: any) => {
       console.log(res);
       this.compiledResult = res
       this.form?.get('result')?.patchValue(res.result)
-
     })
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, { panelClass: 'codeSnackBar' });
   }
 
   ngOnDestroy(): void {
     console.log("on desstroy called");
+    // if(this.checkFormField()){
+    //   localStorage.setItem("codeData", JSON.stringify(this.formData, null, 2))
+    // }
+
     localStorage.setItem("codeData", JSON.stringify(this.formData, null, 2))
   }
 
@@ -259,9 +351,17 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   formateCode() {
-    let code = this.formData.code
-    code = JSON.parse(code)
-    this.formData.code = JSON.stringify(code, null, 2)
+    const options:JSBeautifyOptions = { // optional 
+      indent_size: 2,
+      indent_with_tabs: false,
+      end_with_newline: true,
+      space_in_paren: false,
+      preserve_newlines: true,
+      wrap_line_length: 80,
+      brace_style: 'collapse',
+    };
+       let code = js_beautify(this.formData.code, options)
+      this.formData.code = code
   }
 
   trendingCodeApi() {

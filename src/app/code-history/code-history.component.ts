@@ -48,7 +48,7 @@ export type ChartOptions = {
 
 export class CodeHistoryComponent implements AfterViewInit, OnInit {
 [x: string]: any;
-  displayedColumns2: string[] = ['title', 'question', 'language', 'action'];
+  displayedColumns2: string[] = ['title','question', 'language', 'action'];
 
   dataSource2!: MatTableDataSource<codeHistoryModel>;
   trendingQuestions: trendQuestionModel[] = []
@@ -256,7 +256,7 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
 
     this.codeHistoryService.getDummyTrendingQuestion().subscribe((res: any) => {
       res.map((element: trendQuestionModel) => {
-        element.iconObj = this.mapIconswithLanguage(element.languages[0])
+        element.iconObj = this.mapIconswithLanguage(element.language)
       })
       console.log(res)
       this.trendingQuestions = res

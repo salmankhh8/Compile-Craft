@@ -19,13 +19,15 @@
                     </mat-option>
                 </mat-select>
                 <!-- @if(showLanguagesOptions){
-                        @for (item of languageIcons; track $index) {
+                        @for (item of languageIcons; track $index){
                             <div class="text">
                                 <fa-icon style="margin-right: 5px;"  [ngStyle]="{'color': item.active? item?.color:'#acabab'}" [class]="item.icon"></fa-icon>
                                 {{item.language}}
                             </div>
                         }
                 } -->
+                
+                <!-- <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.08V8l-6-6H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h6"/><path d="M14 3v5h5M18 21v-6M15 18h6"/></svg>                   -->
             </div>
             <div class="action">
                 <button (click)="callExecuteCode()"  class="text_Btn action_Btn">Run
@@ -34,12 +36,15 @@
                 <button class="text_Btn" (click)="formateCode()">
                     <fa-icon [icon]="faTerminal"></fa-icon>
                 </button>
+                <button style="color: #ED5E68;" class="text_Btn" (click)="deleteCode()">
+                    <i class="fa-solid fa-trash"></i>
+                </button>
             </div>
         </div>
-        <app-code [width]="leftPaneWidth" [resizeEditor]="resizeEditor" [language]="this.formData.language" [code]="this.formData.code"  (emitterCode)="codeChanged($event)"></app-code>
+        <app-code [width]="leftPaneWidth" [resizeEditor]="resizeEditor" (emitterClose)="closeDialogBox($event)" [errorField]="this.errorArray['code']?this.errorArray['code']:null" [language]="this.formData.language" [code]="this.formData.code"  (emitterCode)="codeChanged($event)"></app-code>
     </div>
     <button style="cursor: col-resize;" [ngStyle]="{'background-color':(mouseClicked && resizeEditor)?'rgb(19, 122, 212)': ''}" #saperatorBtn class="seperator_Btn" (mousedown)="mouseDown($event)" (mouseenter)="onSeparatorMouseDown($event)" role="separator"></button>
     <div class="resultarea" [style.width]="rightPaneWidth+'%'">
-        <app-result [result]="compiledResult" [title]="this.formData.question" [question]="this.formData.description" (emitterQuestion)="questionUpdated($event)" (emitterSave)="saveCode()" (emitterTitle)="titleUpdatedFn($event)" ></app-result>
+        <app-result [result]="compiledResult" [fieldMessage]="this.errorArray" [title]="this.formData.question" [question]="this.formData.description" (emitterQuestion)="questionUpdated($event)" (emitterSave)="saveCode()" (emitterTitle)="titleUpdatedFn($event)" (emitterClose)="closeDialogBox($event)" ></app-result>
     </div>
 </div>

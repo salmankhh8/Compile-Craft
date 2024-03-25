@@ -1,0 +1,23 @@
+<div class="parent">
+    <div class="header">
+        <i style="cursor: pointer;" (click)="closePopup()" class="fa-solid fa-xmark"></i>
+    </div>
+    <div class="container">
+        <div class="title">
+            {{data.title}}
+        </div>
+        <div class="actions">
+            <!-- {
+                "text":"Delete",
+                "icon":"fa-trash",
+                "action":"Delete",
+                "style":"style1"
+              }, -->
+            @for (item of data.actionButton; track $index) {
+                <div>
+                    <button (click)="popupAction(item.action)" class="actionBtn" [ngClass]="item.style" >{{item.text}} <i class="fa-solid" [ngClass]="item.icon"></i></button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -20,6 +20,17 @@ ngx-monaco-editor{
        } 
 }
 
+.message{
+    position: absolute;
+    z-index: 100;
+    left: 71px;
+    top: -26px;
+    width: auto;
+    padding: 10px;
+    height: auto;
+    border-radius: 10px;
+}
+
 .resizeEditor{
     position: absolute;
     height: 86vh;

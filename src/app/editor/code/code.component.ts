@@ -7,6 +7,8 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { MonacoEditorModule,EditorComponent} from 'ngx-monaco-editor-v2';
 // import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2';
 
+
+
 @Component({
   selector: 'app-code',
   standalone: false,
@@ -26,6 +28,8 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
   @Input() code: any=""
   @Input() resizeEditor:any 
   @Input() language:any
+  @Input() errorField:any
+  @Output() emitterClose= new EventEmitter()
   resizeEditorAfter:boolean= true
    onResizing=false
    showEditor=false
@@ -51,9 +55,9 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
   editorOptions = {
     contextmenu: true,
     theme: 'vs-dark',
-     language: 'javascript',
+    language: 'javascript',
     minimap: {
-      enabled: true
+      enabled: false
     }
   };
   // code: string = "console.log(test())";
@@ -70,6 +74,10 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
     },0)
   }
 
+  closeDialogBox(field:any){
+    this.emitterClose.emit(field)
+  }
+
   formate(){
     // this.monacoEditor.getEditor().trigger('anyString', 'editor.action.formatDocument');
     // this.monacoEditor.propagateChange((ele:any)=>{
@@ -78,8 +86,6 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
     // this.monacoEditor._editor._actions
   }
   ngOnChanges(changes: SimpleChanges): void {
-    // window.innerHeight= window.innerHeight*1.000001
-
     if(!this.code){
       this.code =``;
     }
@@ -90,11 +96,11 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
     else if(this.onResizing){
       this.resizeEditorFunc()
     }
-    else if(changes['language'].currentValue){
+    else if(changes['language']?.currentValue){
       this.resizeEditorFunc()
       this.editorOptions.language=changes['language'].currentValue
     }
-    console.log(this.resizeEditorAfter);
+    console.log(this.resizeEditorAfter, this.errorField);
   }
 
   ngAfterViewInit(): void {
@@ -103,6 +109,7 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
   resizeEditorFunc(){
    this.resizeEditorAfter=false
     setTimeout(()=>{
+      this.onResizing=false
       this.resizeEditorAfter=true
     },10)
   }

@@ -1,0 +1,106 @@
+.parentMessage{
+    position: relative;
+    display: flex; 
+    border-radius: 10px;
+    align-items: center;
+}
+.container{
+    background-image: linear-gradient(to bottom right, #df8073, #ec3e27);
+    padding: 10px;
+    border-radius: 5px;
+    padding-bottom: 37px;
+    position: relative;
+    width: auto;
+}
+.arrowRight { 
+    width: 0;
+    height: 0;
+    // top: 0;
+    border-left: 10px solid #e84b37;
+    border-right: 50px solid transparent;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    // position: absolute;
+} 
+
+.arrowLeft { 
+  width: 0;
+  height: 0;
+  // top: 0;
+  border-left: 50px solid transparent;
+  border-right: 10px solid #e26b5c;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  // position: absolute;
+} 
+.close{
+    position: relative;
+    // margin: 10px 0;
+}
+.close button:hover{
+    cursor: pointer;
+    // background-color: #f44336 !important;
+    background-color: #137ad4 !important;
+    transition: .2s ease-in-out;
+    border: 1px solid #137ad4;
+    color: #c3c3c3;
+}
+.closeAction{
+    position: absolute;
+    right: 0;
+    border: none;
+    top: 5px;
+    border-radius: 3px;
+    font-family: 'Roboto';
+    padding: 3px 5px;
+    color: #201f1f;
+    transition: .2s ease-in-out;
+    border: 1px solid #c3c3c3;
+}
+.message{
+    font-size: 12px;
+}
+
+.thumbsAction{
+    position: absolute;
+    right: 0;
+    border: none;
+    margin-right: 10%;
+//     transition: opacity .5s, margin-top .5s, margin-bottom .5s;
+// -webkit-transition: opacity .5s, margin-top .5s, margin-bottom .5s;
+ animation: fadeInOut 1s forwards;
+}
+
+.fadeOutBox{
+    animation: fadeInOutParent 1.2s forwards;
+    animation-delay: .4s;
+}
+
+@keyframes fadeInOut {
+    0% {
+      opacity: .4;
+      transform: translateY(0px);
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes fadeInOutParent {
+    0% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    50% {
+      opacity: 0;
+    }
+
+    100%{
+        opacity: 0;
+    }
+  }
+

@@ -1,0 +1,57 @@
+.parent{
+    display: inline-block;
+    // padding: 20px 10px;
+    box-sizing: border-box;
+
+    font-family: 'Roboto';
+    .header{
+        padding: 5px 10px;
+        display: flex;
+        justify-content: end;
+    }
+
+    .container{
+        padding: 2px  20px 10px;
+        .title{
+            text-align: center;
+        }
+        .actions{
+            display: flex;
+            margin-top: 20px;
+            justify-content: space-around;
+            .actionBtn{
+                    width: 100%;
+                    padding: 6px 11px;
+                    // background-color: rgb(31, 31, 31);
+                    border-radius: 5px;
+                    font-size: 14px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    cursor: pointer;
+                    // color: #c2c2c2;
+                    border: none;
+            }
+            .style1 {
+                background-color: #FF6347; /* Tomato (Cancel Button) */
+                color: #c3c3c3;
+              }
+            
+            .style2 {
+                background-color: #1c7a1c; /* Lime Green (Save Button) */
+                color: #c3c3c3;
+              }
+            
+            .style3 {
+                background-color: #DC143C; /* Crimson Red (Delete Button) */
+                color: #c3c3c3;
+            }
+            i{
+                margin-left: 4px;
+            }
+        }
+    }
+
+
+}

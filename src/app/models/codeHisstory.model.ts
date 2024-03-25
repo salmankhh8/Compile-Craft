@@ -1,12 +1,13 @@
 import { IconDefinition } from "@fortawesome/fontawesome-svg-core"
 
 export interface codeHistoryModel{
-    Sno:string,
+    id:string,
     title:string,
     question:string,
     time:string,
     code:string,
-    language:string
+    language:string,
+    description:string,
     iconObj:{
         icon:string,
         color:string
@@ -19,7 +20,7 @@ export interface trendQuestionModel{
     question:string,
     description:string,
     link:string,
-    languages:string,
+    language:string,
     code:string
     iconObj:{
         icon:string,
