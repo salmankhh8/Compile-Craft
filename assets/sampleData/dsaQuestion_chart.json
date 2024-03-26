@@ -1,0 +1,93 @@
+[
+    {
+      "language": "java",
+      "questions": [
+        {
+          "question": "Merge Sort",
+          "type": "sorting",
+          "askedPercentage": 20
+        },
+        {
+          "question": "Reverse a String",
+          "type": "string manipulation",
+          "askedPercentage": 15
+        },
+        {
+          "question": "Linked List Implementation",
+          "type": "linked list",
+          "askedPercentage": 25
+        },
+        {
+          "question": "Binary Search",
+          "type": "searching",
+          "askedPercentage": 10
+        },
+        {
+          "question": "Stack Implementation",
+          "type": "stack",
+          "askedPercentage": 35
+        }
+      ]
+    },
+    {
+      "language": "python",
+      "questions": [
+        {
+          "question": "Merge Sort",
+          "type": "sorting",
+          "askedPercentage": 18
+        },
+        {
+          "question": "String Reverse",
+          "type": "string manipulation",
+          "askedPercentage": 20
+        },
+        {
+          "question": "Binary Search",
+          "type": "searching",
+          "askedPercentage": 22
+        },
+        {
+          "question": "Queue Implementation",
+          "type": "queue",
+          "askedPercentage": 12
+        },
+        {
+          "question": "Graph Traversal",
+          "type": "graph",
+          "askedPercentage": 25
+        }
+      ]
+    },
+    {
+      "language": "javascript",
+      "questions": [
+        {
+          "question": "Merge Sort",
+          "type": "sorting",
+          "askedPercentage": 17
+        },
+        {
+          "question": "String Reverse",
+          "type": "string manipulation",
+          "askedPercentage": 18
+        },
+        {
+          "question": "Binary Search Tree Implementation",
+          "type": "binary search tree",
+          "askedPercentage": 30
+        },
+        {
+          "question": "Hash Table Implementation",
+          "type": "hash table",
+          "askedPercentage": 15
+        },
+        {
+          "question": "Depth-First Search (DFS)",
+          "type": "search algorithm",
+          "askedPercentage": 20
+        }
+      ]
+    }
+  ]
+  
