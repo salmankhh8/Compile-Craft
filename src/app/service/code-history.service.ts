@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { codeHistoryModel, trendQuestionModel } from '../models/codeHisstory.model';
 import { Observable, of } from 'rxjs';
+import { routes } from '../app.routes';
 
 @Injectable({
   providedIn: 'root'
@@ -40,15 +41,30 @@ export class CodeHistoryService {
   }
 
   getDummyTrendingQuestion():Observable<trendQuestionModel>{
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      // Use the relative path for localhost
+      return this.http.get<trendQuestionModel>('../../assets/sampleData/trending.json');
+    } else {
+      // Use the absolute path for deployment
+      return this.http.get<trendQuestionModel>('https://salmankhh8.github.io/assets/sampleData/sample.json');
+    }
     return this.http.get<trendQuestionModel>("../../assets/sampleData/trending.json")
   }
 
-  getDSATypeChartData(){
-    return this.http.get<any>("../../assets/sampleData/dsaQuestion_chart.json")
+  getDSATypeChartData(): Observable<any> {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return this.http.get<any>('../../assets/sampleData/dsaQuestion_chart.json');
+    } else {
+      return this.http.get<any>('https://salmankhh8.github.io/assets/sampleData/dsaQuestion_chart.json');
+    }
   }
-  
-  getDailyCodeLogs(){
-    return this.http.get("../../assets/sampleData/workingHourLogs.json")
+
+  getDailyCodeLogs(): Observable<any> {
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return this.http.get<any>('../../assets/sampleData/workingHourLogs.json');
+    } else {
+      return this.http.get<any>('https://salmankhh8.github.io/assets/sampleData/workingHourLogs.json');
+    }
   }
 
   checkDataExist(savedData:any, data:any){
