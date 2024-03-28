@@ -1,0 +1,77 @@
+{
+    "trends": [
+      {
+        "month": "January",
+        "Java": 100,
+        "Python": 80,
+        "JavaScript": 120
+      },
+      {
+        "month": "February",
+        "Java": 110,
+        "Python": 75,
+        "JavaScript": 130
+      },
+      {
+        "month": "March",
+        "Java": 105,
+        "Python": 90,
+        "JavaScript": 125
+      },
+      {
+        "month": "April",
+        "Java": 120,
+        "Python": 85,
+        "JavaScript": 140
+      },
+      {
+        "month": "May",
+        "Java": 115,
+        "Python": 95,
+        "JavaScript": 135
+      },
+      {
+        "month": "June",
+        "Java": 130,
+        "Python": 80,
+        "JavaScript": 150
+      },
+      {
+        "month": "July",
+        "Java": 125,
+        "Python": 100,
+        "JavaScript": 145
+      },
+      {
+        "month": "August",
+        "Java": 140,
+        "Python": 85,
+        "JavaScript": 160
+      },
+      {
+        "month": "September",
+        "Java": 135,
+        "Python": 95,
+        "JavaScript": 155
+      },
+      {
+        "month": "October",
+        "Java": 150,
+        "Python": 90,
+        "JavaScript": 170
+      },
+      {
+        "month": "November",
+        "Java": 145,
+        "Python": 100,
+        "JavaScript": 165
+      },
+      {
+        "month": "December",
+        "Java": 160,
+        "Python": 85,
+        "JavaScript": 180
+      }
+    ]
+  }
+  
