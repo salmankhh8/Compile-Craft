@@ -14,8 +14,7 @@ export class CompilerService {
     }
     console.log(body, "api called");
     
-    return this.http.post<any>("http://localhost:4000/compileCode",body)
-
+    return this.http.post<any>("https://marbled-substantial-august.glitch.me/compileCode",body)
   }
 
 

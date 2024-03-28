@@ -255,16 +255,16 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
     })
 
     this.codeHistoryService.getDummyTrendingQuestion().subscribe((res: any) => {
-      res.map((element: trendQuestionModel) => {
+      res.data.map((element: trendQuestionModel) => {
         element.iconObj = this.mapIconswithLanguage(element.language)
       })
       console.log(res)
-      this.trendingQuestions = res
+      this.trendingQuestions = res.data
     })
 
     this.codeHistoryService.getDSATypeChartData().subscribe((res:any)=>{
       let count=0
-      res.forEach((element:any) => {
+      res.data.forEach((element:any) => {
         element.id=count++
         element.iconObj=this.mapIconswithLanguage(element.language)
         element.active=false

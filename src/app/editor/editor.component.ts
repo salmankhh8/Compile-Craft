@@ -153,8 +153,8 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
 
   callQuestionDeatiails(id: string) {
     this.codeHistory.getDummyTrendingQuestion().subscribe((res: any) => {
-      if (res && id) {
-        this.findDataWithId(res, id)
+      if (res.data && id) {
+        this.findDataWithId(res.data, id)
       }
     })
   }

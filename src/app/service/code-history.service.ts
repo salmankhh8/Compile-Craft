@@ -17,7 +17,7 @@ export class CodeHistoryService {
 
   getDummyDataCode():Observable<codeHistoryModel>{
 
-    return this.http.get<codeHistoryModel>('../../assets/sampleData/sample.json')
+    // return this.http.get<codeHistoryModel>('../../assets/sampleData/sample.json')
     let data:any = (localStorage.getItem('codeList'))
     // return data
     if( typeof data == 'string'){
@@ -41,30 +41,21 @@ export class CodeHistoryService {
   }
 
   getDummyTrendingQuestion():Observable<trendQuestionModel>{
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
       // Use the relative path for localhost
-      return this.http.get<trendQuestionModel>('../../assets/sampleData/trending.json');
-    } else {
-      // Use the absolute path for deployment
-      return this.http.get<trendQuestionModel>('https://salmankhh8.github.io/assets/sampleData/sample.json');
-    }
-    return this.http.get<trendQuestionModel>("../../assets/sampleData/trending.json")
+      return this.http.get<trendQuestionModel>('https://marbled-substantial-august.glitch.me/trendingCode');
   }
 
   getDSATypeChartData(): Observable<any> {
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return this.http.get<any>('../../assets/sampleData/dsaQuestion_chart.json');
-    } else {
-      return this.http.get<any>('https://salmankhh8.github.io/assets/sampleData/dsaQuestion_chart.json');
-    }
+      return this.http.get<any>('https://marbled-substantial-august.glitch.me/dsaQuestion_chart');
   }
 
   getDailyCodeLogs(): Observable<any> {
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return this.http.get<any>('../../assets/sampleData/workingHourLogs.json');
-    } else {
-      return this.http.get<any>('https://salmankhh8.github.io/assets/sampleData/workingHourLogs.json');
-    }
+    // if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return this.http.get<any>('/assets/sampleData/workingHourLogs.json');
+    // }
+    //  else {
+    //   return this.http.get<any>('https://salmankhh8.github.io/Compile-Craft/assets/sampleData/workingHourLogs.json');
+    // }
   }
 
   checkDataExist(savedData:any, data:any){
