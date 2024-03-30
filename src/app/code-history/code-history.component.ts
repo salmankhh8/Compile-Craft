@@ -372,8 +372,8 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
   }
 
   openInNewTab(router:string,id:string){
-    console.log(window.location, router,"Window Location");
-    let currentHref = window.location.origin+ `/${router}/${id}`
+    console.log(window.location, router, window.location.origin+"/"+window.location.pathname.split("/")[1]+ `/${router}/${id}` ,"Window Location");
+    let currentHref = window.location.origin+"/"+window.location.pathname.split("/")[1]+ `/${router}/${id}`
     window.open(currentHref, "_blank")
   }
 
