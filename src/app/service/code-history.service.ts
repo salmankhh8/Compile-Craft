@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { codeHistoryModel, trendQuestionModel } from '../models/codeHisstory.model';
 import { Observable, of } from 'rxjs';
+import { routes } from '../app.routes';
 
 @Injectable({
   providedIn: 'root'

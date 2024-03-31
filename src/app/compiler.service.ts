@@ -15,7 +15,10 @@ export class CompilerService {
     console.log(body, "api called");
     
     return this.http.post<any>("https://marbled-substantial-august.glitch.me/compileCode",body)
+<<<<<<< HEAD
 
+=======
+>>>>>>> ad6062da04633f6d2b81e10fdb382c853722bf76
   }
 
 
