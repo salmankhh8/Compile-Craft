@@ -16,7 +16,7 @@ export class CodeHistoryService {
 
   getDummyDataCode():Observable<codeHistoryModel>{
 
-    return this.http.get<codeHistoryModel>('../../assets/sampleData/sample.json')
+    // return this.http.get<codeHistoryModel>('../../assets/sampleData/sample.json')
     let data:any = (localStorage.getItem('codeList'))
     // return data
     if( typeof data == 'string'){
@@ -40,15 +40,15 @@ export class CodeHistoryService {
   }
 
   getDummyTrendingQuestion():Observable<trendQuestionModel>{
-    return this.http.get<trendQuestionModel>("../../assets/sampleData/trending.json")
+    return this.http.get<trendQuestionModel>('https://marbled-substantial-august.glitch.me/trendingCode');
   }
 
   getDSATypeChartData(){
-    return this.http.get<any>("../../assets/sampleData/dsaQuestion_chart.json")
+    return this.http.get<any>('https://marbled-substantial-august.glitch.me/dsaQuestion_chart');
   }
   
   getDailyCodeLogs(){
-    return this.http.get("../../assets/sampleData/workingHourLogs.json")
+    return this.http.get<any>("https://marbled-substantial-august.glitch.me/workingHourLogs")
   }
 
   checkDataExist(savedData:any, data:any){

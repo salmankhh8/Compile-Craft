@@ -16,6 +16,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CommonPopupComponent } from '../common-popup/common-popup.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // import {MonacoEditorModule, NgxMonacoEditorConfig} from 'ngx-monaco-editor'
 
@@ -42,10 +43,11 @@ const monacoConfig: NgxMonacoEditorConfig = {
     MatSelectModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
     // MonacoEditorModule.forRoot(monacoConfig)
   ],
   providers:[CompilerService],
-    exports:[CodeComponent,ResultComponent, CommonModule, FontAwesomeModule,FormsModule, MatSelectModule, MatDialogModule,MatSnackBarModule]
+    exports:[CodeComponent,ResultComponent, CommonModule, FontAwesomeModule,FormsModule, MatSelectModule, MatDialogModule,MatSnackBarModule, MatTooltipModule]
 })
 export class EditorModule { }
