@@ -17,13 +17,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-<<<<<<< HEAD
             "outputPath": "dist",
-            "index": "src/index.html",
-=======
-            "outputPath": "docs",
             "index": "index.html",
->>>>>>> ad6062da04633f6d2b81e10fdb382c853722bf76
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
