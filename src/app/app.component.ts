@@ -4,6 +4,7 @@ import { EditorModule } from './editor/editor.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CompilerService } from './compiler.service';
 import { RouterModule } from '@angular/router';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,8 @@ export class AppComponent {
   cell1Width = 250; // Initial width of Cell 1
 
   @HostListener('mousemove', ['$event'])
+
+  // console.log = function() {}`
   onMouseMove(event:MouseEvent){
     if (this.resizing) {
       const deltaX = event.clientX - this.startX;

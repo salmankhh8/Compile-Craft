@@ -1,4 +1,8 @@
-<div class="editorParent"  #editorParent>
+<div class="editorParent"  #editorParent 
+(mousemove)="onUserAction()"
+(click)="onUserAction()"
+(keypress)="onUserAction()"
+>
     <div class="codeArea" [style.width.px]="leftPaneWidth">
         <div class="heading">
             <div class="language">

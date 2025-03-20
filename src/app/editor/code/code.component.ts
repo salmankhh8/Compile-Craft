@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnDestroy, OnInit, Output, Renderer2, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { EditorModule } from '../editor.module';
 import { CodeEditorModule, CodeModel } from '@ngstack/code-editor';
@@ -15,7 +15,7 @@ import { MonacoEditorModule,EditorComponent} from 'ngx-monaco-editor-v2';
   templateUrl: './code.component.html',
   styleUrl: './code.component.scss'
 })
-export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
+export class CodeComponent implements AfterViewInit , OnChanges, OnInit, OnDestroy {
   // editorOptions = {theme: 'vs-dark', language: 'javascript'};
   // code: string= 'function x() {\nconsole.log("Hello world!");\n}';
   @Output() emitterCode =new EventEmitter()
@@ -33,6 +33,8 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
   resizeEditorAfter:boolean= true
    onResizing=false
    showEditor=false
+   startTime = Date.now()
+   endTime = Date.now()
   constructor(private renderer:Renderer2) {
     console.log(window.innerWidth, window.innerHeight);
    }
@@ -68,6 +70,7 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
   ngOnInit(): void {
     console.log(this.code);
     this.code.toString()
+    this.startTime = Date.now();
     setTimeout(()=>{
       this.emitterCode.emit(this.code)
       // this.monacoEditor.writeValue(this.width)
@@ -100,7 +103,13 @@ export class CodeComponent implements AfterViewInit , OnChanges, OnInit {
       this.resizeEditorFunc()
       this.editorOptions.language=changes['language'].currentValue
     }
-    console.log(this.resizeEditorAfter, this.errorField);
+    // console.log(this.resizeEditorAfter, this.errorField);
+  }
+
+  ngOnDestroy(): void {
+    this.endTime =Date.now()
+
+    console.log((this.endTime- this.startTime)/1000,"seconds spend by user")
   }
 
   ngAfterViewInit(): void {

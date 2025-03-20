@@ -12,12 +12,12 @@ export class MonacoCodeComponent {
 
 
   editorOptions = {
-    theme: 'vs-dark', language: 'javascript',
+    theme: 'vs-dark', language: 'python',
     minimap: {
       enabled: true
     }
   };
-  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+  code: string = 'def x() {\n print("Hello world!");\n}';
 
 
 }

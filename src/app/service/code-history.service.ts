@@ -1,8 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { codeHistoryModel, trendQuestionModel } from '../models/codeHisstory.model';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { routes } from '../app.routes';
+// const {json, chartJson,coding_sessions} = require("./samplData.js")
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +19,8 @@ export class CodeHistoryService {
 
   codeList:codeHistoryModel[]=[]
 
+  current_url=location.host
+  
   getDummyDataCode():Observable<codeHistoryModel>{
 
     // return this.http.get<codeHistoryModel>('../../assets/sampleData/sample.json')
@@ -40,18 +46,37 @@ export class CodeHistoryService {
     return true
   }
 
-  getDummyTrendingQuestion():Observable<trendQuestionModel>{
+  getDummyTrendingQuestion():Observable<{ data: any }>{
       // Use the relative path for localhost
-      return this.http.get<trendQuestionModel>('https://marbled-substantial-august.glitch.me/trendingCode');
+      if (this.current_url =="localhost:4200"){
+        console.log("laoding file from local path",this.current_url)
+        return this.http.get<trendQuestionModel>("../../assets/sampleData/trending.json").pipe(map((response) => ({ data: response }))
+      )}
+      else{
+        console.log("laoding file from server",this.current_url)
+        return this.http.get<any>('https://marbled-substantial-august.glitch.me/trendingCode');
+      }
   }
 
-  getDSATypeChartData(): Observable<any> {
+  getDSATypeChartData(): Observable<{data:any}> {
+    if (this.current_url =="localhost:4200"){
+      console.log("laoding file from local path",this.current_url)
+      return this.http.get<trendQuestionModel>("../../assets/sampleData/dsaQuestion_chart.json").pipe(map(res=>({data:res})))
+    }
+    else{
       return this.http.get<any>('https://marbled-substantial-august.glitch.me/dsaQuestion_chart');
+    }
   }
 
   getDailyCodeLogs(): Observable<any> {
     // if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-      return this.http.get<any>('/assets/sampleData/workingHourLogs.json');
+      if (this.current_url =="localhost:4200"){
+        console.log("laoding file from local path",this.current_url)
+        return this.http.get<trendQuestionModel>("../../assets/sampleData/workingHourLogs.json").pipe(map(res=> ({data:res})))
+      }
+      else{
+        return this.http.get<any>('/assets/sampleData/workingHourLogs.json');
+      }
     // }
     //  else {
     //   return this.http.get<any>('https://salmankhh8.github.io/Compile-Craft/assets/sampleData/workingHourLogs.json');

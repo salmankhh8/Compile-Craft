@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, Injectable, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { CodeComponent } from './code/code.component';
 import { ResultComponent } from './result/result.component';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
@@ -18,6 +18,10 @@ import { CommonPopupComponent } from '../common-popup/common-popup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 // import { js_beautify } from 'js-beautify';
 import { JSBeautifyOptions, js_beautify } from 'js-beautify'
+import { IdleService } from './idle.service';
+import { debounceTime, Subject, Subscription } from 'rxjs';
+import { loadPyodide, PyodideInterface } from 'pyodide';
+
 // import { LanguageIcons } from '../code-history/code-history.component';
 
 
@@ -51,9 +55,14 @@ export interface FormData {
   styleUrl: './editor.component.scss'
 })
 
+@Injectable({
+  providedIn: 'root'
+})
+
 
 export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
 
+  idleService = inject(IdleService)
   constructor(private compileService: CompilerService, private fb: FormBuilder, private router: Router, private codeHistory: CodeHistoryService, private dialog: MatDialog, private _snackBar: MatSnackBar) {
     this.router.events.subscribe((event: any) => {
       if (event instanceof NavigationEnd) {
@@ -82,6 +91,7 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
       }
 
     })
+
   }
   faDropDown = faAngleDown
   faTerminal = faTerminal
@@ -128,8 +138,13 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
     language: "",
     code: "",
   }
+  currentTime : string = ""
+  totalDuration: string= ""
+  startTime: string = ""
 
   errorArray: { [key: string]: any } = {}
+  private idleSubscription?: Subscription;
+  private timeInterval: any;
 
   @ViewChild('editorParent') editorWidth!: ElementRef
   @ViewChild('saperatorBtn') saperatorBtn!: ElementRef
@@ -141,7 +156,21 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+    // this.idleSubscription = this.idleService.idleState.subscribe((isIdle)=>{
+    //   if(isIdle){
+    //     console.log("user is inactive")
+    //   }
+    //   else{
+    //     console.log("user is active")
+    //     this.idleService.sendRequest()
+    //     // this.idleService.stopEmmision()
+    //   }
+    // })
     // this.form = this.fb.group({
+      // window.addEventListener("load", detectZoom());
+      // this.detectZoom()/
+      // this.adjustToOptimalResolution()
     //   title:['',Validators.required],
     //   question:['', Validators.required],
     //   code:['', Validators.required],
@@ -150,6 +179,15 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
     //   id:['',Validators.required]
     // })
   }
+
+  // detectZoom() {
+  //   const zoomLevel = Math.round(window.devicePixelRatio * 100);
+  //   console.log(window,"zoom lever")
+  //   if (zoomLevel !== 100) {
+  //     alert(`Your browser zoom is set to ${zoomLevel}%. Please reset it to 100% for the best experience.`);
+  //   }
+  // }
+  // Call the function to log values
 
   callQuestionDeatiails(id: string) {
     this.codeHistory.getDummyTrendingQuestion().subscribe((res: any) => {
@@ -332,8 +370,24 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
     // if(this.checkFormField()){
     //   localStorage.setItem("codeData", JSON.stringify(this.formData, null, 2))
     // }
+  
+    if(this.idleSubscription){
+      this.idleSubscription.unsubscribe()
+    }
+
 
     localStorage.setItem("codeData", JSON.stringify(this.formData, null, 2))
+
+    if (this.timeInterval) {
+      clearInterval(this.timeInterval);
+    }
+
+    // Disconnect from WebSocket when the component is destroyed
+  }
+
+  onUserAction(){
+    // this.idleService.resetTimer()
+    this.idleService.reset()
   }
 
   dropDownClicked(event: any) {
@@ -350,7 +404,16 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
     this.selectedValue = event
   }
 
+  // async loadPyodide() {
+  //   if (!this.pyodide) {
+  //     this.pyodide = await loadPyodide();
+  //     await this.pyodide.loadPackage('autopep8');
+  //   }
+  // }
+
+
   formateCode() {
+    // console.log(this.formData.language)
     const options:JSBeautifyOptions = { // optional 
       indent_size: 2,
       indent_with_tabs: false,
@@ -373,7 +436,7 @@ export class EditorComponent implements AfterViewInit, OnInit, OnDestroy {
     let testStr = "console.log('testing123')"
     // input= input.toString()
     console.log(input);
-    input = input.replace(/\r\n/g, ';\n');
+    input = input.replace(/\r\n/g, '\n');
     // const consoleLogRegex = /console\.log\(([^;]+?)\);?/g;
     // const consoleLogRegex = /console\.log\(([^;]*?)\);?/g;
     const consoleLogRegex = /console\.log\(([^;]*\([^;]*\)[^;]*)\);?/g;

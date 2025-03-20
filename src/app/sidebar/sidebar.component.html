@@ -1,5 +1,11 @@
 <div class="sidbarParent">
     <div class="icons">
+        <div class="icon">
+            <img width="35px" src="../../assets/icons/code_craft.png" alt="">
+        </div>
+        <div class="icon" (click)="openDialoBox()">
+            <fa-icon class="icon" [icon]="faUserCheck"></fa-icon>
+        </div>
         <div class="icon" *ngFor="let item of routesArray; let i=index " (click)="!item.disabled &&routerLinkcliked(i)">
             <fa-icon [ngClass]="item.active?'active':item.disabled?'disabled':''" [icon]="item.icon"></fa-icon>
         </div>

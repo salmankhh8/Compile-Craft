@@ -88,6 +88,7 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
   // }
   iconsArr:DSATypeChart[]=[]
   lineChartSeries:any[]=[]
+
   constructor(private codeHistoryService: CodeHistoryService, private router: Router) {
     this.chartOptions = {
       series: [],
@@ -241,7 +242,7 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
 
 
     this.codeHistoryService.getDummyDataCode().subscribe((res: any) => {
-      res.map((element:codeHistoryModel)=>{
+      res.data.map((element:codeHistoryModel)=>{
         element.iconObj= this.mapIconswithLanguage(element.language)
       })
 
@@ -255,10 +256,10 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
     })
 
     this.codeHistoryService.getDummyTrendingQuestion().subscribe((res: any) => {
+      console.log(res,"reposne of dummy trending")
       res.data.map((element: trendQuestionModel) => {
         element.iconObj = this.mapIconswithLanguage(element.language)
       })
-      console.log(res)
       this.trendingQuestions = res.data
     })
 
@@ -284,7 +285,7 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
       this.lineChartSeries=[
         {
           name:"workingHours",
-          data:this.transformData(res["coding_sessions"])
+          data:this.transformData(res.data["coding_sessions"])
         }
       ]
       console.log(this.lineChartSeries)
@@ -301,6 +302,7 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
   }
 
   mapIconswithLanguage(language: any) {
+    console.log(language)
     if(language=='js'){
       language='javascript'
     }
@@ -352,9 +354,58 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
     // }
   }
 
+  isZoomLevelOptimal() {
+    // Calculate browser zoom level for width
+    const zoomLevelWidth = Math.round((window.innerWidth / document.documentElement.clientWidth) * 100);
+  
+    // Calculate browser zoom level for height
+    const zoomLevelHeight = Math.round((window.innerHeight / document.documentElement.clientHeight) * 100);
+  
+    // Log both width and height zoom levels
+    console.log("Zoom Level (Width):", zoomLevelWidth + "%");
+    console.log("Zoom Level (Height):", zoomLevelHeight + "%");
+
+  //   alert(`${zoomLevelHeight},${zoomLevelWidth},setting  = ${window.devicePixelRatio};, ${window.screen.availHeight}
+  // ${window.screen.availWidth}
+  // `)
+  
+    // Check if both zoom levels are within the range [98, 102]
+    const isOptimalWidth = zoomLevelWidth >= 98 && zoomLevelWidth <= 102;
+    const isOptimalHeight = zoomLevelHeight >= 98 && zoomLevelHeight <= 102;
+  
+    if (isOptimalWidth && isOptimalHeight) {
+      console.log("Browser zoom level is optimal for both dimensions.");
+      return true;
+    } else {
+      console.log("Browser zoom level is not optimal. Adjustments needed.");
+      return false;
+    }
+  }
+  
+  // Call the function to check zoom level
+  
+
+  getZoomInfo() {
+    // Device Pixel Ratio (hardware scaling)
+    const devicePixelRatio = window.devicePixelRatio;
+  
+    // Browser Zoom Level (%)
+    const browserZoomLevel = Math.round((window.innerWidth / document.documentElement.clientWidth) * 100);
+  
+    console.log("Device Pixel Ratio:", devicePixelRatio);
+    console.log("Browser Zoom Level:", browserZoomLevel);
+
+    // if (browserZoomLevel <=98 || browserZoomLevel>=102 ){
+    //   alert(`Your browser zoom is set to ${browserZoomLevel}%. Please reset it to 100% for the best UI ience.`);
+
+    // } 
+  }
+
   ngAfterViewInit() {
     setTimeout(() => {
       this.tableContainer.nativeElement
+          // this.getZoomInfo()
+      this.isZoomLevelOptimal()
     }, 10)
   }
 
@@ -373,7 +424,8 @@ export class CodeHistoryComponent implements AfterViewInit, OnInit {
 
   openInNewTab(router:string,id:string){
     console.log(window.location, router, window.location.origin+"/"+window.location.pathname.split("/")[1]+ `/${router}/${id}` ,"Window Location");
-    let currentHref = window.location.origin+"/"+window.location.pathname.split("/")[1]+ `/${router}/${id}`
+    // let currentHref = window.location.origin+"/"+window.location.pathname.split("/")[1]+ `/${router}/${id}`
+    let currentHref = window.location.origin+ `/${router}/${id}`
     window.open(currentHref, "_blank")
   }
 

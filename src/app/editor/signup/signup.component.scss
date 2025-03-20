@@ -1,0 +1,133 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    background-color: #222;
+    font-family: 'Roboto', sans-serif;
+  }
+  .mat-mdc-dialog-container .mdc-dialog__surface {
+    background-color: none;
+  }
+  .auth-box {
+    background: #222;
+    padding: 0.4rem 1.5rem;
+    border-radius: 10px;
+    // box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    color: rgba(255, 255, 255, 0.8);
+  }
+  
+  .auth-box h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .form-group {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+  
+  label {
+    font-size: 0.9rem;
+  }
+  
+//   input {
+//     width: 100%;
+//     padding: 0.5rem;
+//     margin-top: 0.5rem;
+//     border-radius: 5px;
+//     border: 1px solid #444;
+//     background: #333;
+//     color: white;
+//   }
+  
+  input:focus {
+    outline: none;
+    border-color: #777;
+  }
+  
+  .btn {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 1rem 0;
+    background: #079875;
+    // background: #403f3f;
+    color: rgba(255, 255, 255, 0.8);
+    border: none;
+    // font-weight: 600;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn:hover {
+    background: #02b189;;
+  }
+  
+  p {
+    font-size: 0.8rem;
+  }
+  
+  a {
+    color: #1e90ff;
+    cursor: pointer;
+    text-decoration: none !important;
+  }
+  .sign-in{
+    color: #02b189;
+  }
+
+  .sign-up{
+    color: rgb(0, 134, 255);
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .btn-brands{
+    width: 100%;
+    padding: 0.5rem;
+    margin: .5rem 0;
+    background: #403f3f;
+    color: rgba(255, 255, 255, 0.8);
+    ;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .btn-brands:hover {
+    background: rgb(0, 134, 255);
+  }
+
+//   .custom-height {
+//     height: 60px;
+//     /* Set the height you desire */
+// }
+
+// .custom-height .mat-form-field-wrapper {
+//   padding-bottom: 0;
+//   padding-top: 0;
+//   height: 100%;
+// }
+
+// .custom-height .mat-input-element {
+//   height: 100%;
+//   padding-top: 0;
+//   padding-bottom: 0;
+//   margin: 0;
+//   line-height: 60px;
+// }
+::ng-deep .mat-mdc-text-field-wrapper {
+height: 3rem !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper .mat-mdc-form-field-flex .mat-mdc-floating-label{
+  top: calc(3rem/2);
+}
+
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface{
+  height: auto;
+}

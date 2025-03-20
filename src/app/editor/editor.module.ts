@@ -8,6 +8,7 @@ import { ResultComponent } from './result/result.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor-v2';
 import { CompilerService } from '../compiler.service';
+import {MatTabsModule} from '@angular/material/tabs';
 import { HttpClientModule } from '@angular/common/http';
 import { MonacoCodeComponent } from './code/monaco-code/monaco-code.component';
 import { MatSelectModule } from '@angular/material/select';
@@ -16,6 +17,11 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { CommonPopupComponent } from '../common-popup/common-popup.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatIconModule} from '@angular/material/icon';
+import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+import { IdleService } from './idle.service';
+import { GoogleAuthService } from '../google-auth.service';
+
 
 // import {MonacoEditorModule, NgxMonacoEditorConfig} from 'ngx-monaco-editor'
 
@@ -42,10 +48,14 @@ const monacoConfig: NgxMonacoEditorConfig = {
     MatSelectModule,
     MatButtonModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTabsModule,
+    MatIconModule,
+    NgIdleKeepaliveModule.forRoot()
+
     // MonacoEditorModule.forRoot(monacoConfig)
   ],
-  providers:[CompilerService],
-    exports:[CodeComponent,ResultComponent, CommonModule, FontAwesomeModule,FormsModule, MatSelectModule, MatDialogModule,MatSnackBarModule]
+  providers:[CompilerService,IdleService, GoogleAuthService],
+    exports:[CodeComponent,ResultComponent, CommonModule, FontAwesomeModule,FormsModule, MatSelectModule, MatDialogModule,MatSnackBarModule,MatTabsModule,MatIconModule]
 })
 export class EditorModule { }

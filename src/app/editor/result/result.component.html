@@ -30,23 +30,58 @@
         </div>
     </div>
     <div class="border"></div>
-    <div class="heading">
-        <div class="question_area">
-        <div class="leftSection">
-            Result!
-        </div>
-        <div class="rightSection">
-            <div class="pretify">
-                <button class="text_Btn" (click)="copyResult()">
-                    Copy
-                    <fa-icon style="margin-left: 5px;" [icon]="faCopy"></fa-icon>
-                </button>
-            </div>
-        </div>
-    </div>
+    <div class="heading" #resultContainer>
+        <mat-tab-group>
+            <mat-tab label="">
+                <ng-template mat-tab-label>
+                    <fa-icon [icon]="faCode"></fa-icon>
+                   &nbsp;
+                    Result!
+                </ng-template>
+                <!-- <mat-icon ></mat-icon> -->
+                <!-- <div class="question_area">
+                    <div class="rightSection">
+                    </div>
+                </div> -->
+                    <div #childContainer class="codeResults mat-elevation-z4 mat-result-container" [innerText]="resultCode?resultCode:'Awaiting Result...'">
+                        <!-- {{resultCode}} -->
+                    </div>
+            </mat-tab>
+            <mat-tab label="">
+                <ng-template mat-tab-label>
+                    <mat-icon >equalizer</mat-icon>
+                    &nbsp;
+                        Analysis
+                    <svg class="svg_tab_title" width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z" fill="url(#prefix__paint0_radial_980_20147)"/><defs><radialGradient id="prefix__paint0_radial_980_20147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)"><stop offset=".067" stop-color="#9168C0"/><stop offset=".343" stop-color="#5684D1"/><stop offset=".672" stop-color="#1BA1E3"/></radialGradient></defs></svg>
+                </ng-template>
+            <div #childContainer class="codeResults mat-elevation-z4 mat-result-container">
+                <div class="release_soon">
+                    <span>
+                        <svg width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z" fill="url(#prefix__paint0_radial_980_20147)"/><defs><radialGradient id="prefix__paint0_radial_980_20147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)"><stop offset=".067" stop-color="#9168C0"/><stop offset=".343" stop-color="#5684D1"/><stop offset=".672" stop-color="#1BA1E3"/></radialGradient></defs></svg>
+                    </span>
+                    <span style="margin-left: 5px;" class="animated-gradient-text">Releasing Soon...</span>
+                </div>
+            </div>    
+            </mat-tab>
+            <mat-tab label="Test case">
+                <ng-template mat-tab-label>
+                    <mat-icon>bug_report</mat-icon>
+                    Test Case
+                    <svg class="svg_tab_title" width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z" fill="url(#prefix__paint0_radial_980_20147)"/><defs><radialGradient id="prefix__paint0_radial_980_20147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)"><stop offset=".067" stop-color="#9168C0"/><stop offset=".343" stop-color="#5684D1"/><stop offset=".672" stop-color="#1BA1E3"/></radialGradient></defs></svg>
 
-        <div class="codeResults" [innerText]="resultCode?resultCode:'Awaiting Result...'">
-            <!-- {{resultCode}} -->
-        </div>
-    </div>
+                </ng-template>
+                <div #childContainer class="codeResults mat-elevation-z4 mat-result-container">
+                    <div class="release_soon">
+
+                        <!-- top: 10px;
+    position: absolute;
+    right: -6; -->
+                        <span>
+                            <svg  width="30" height="30" fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M16 8.016A8.522 8.522 0 008.016 16h-.032A8.521 8.521 0 000 8.016v-.032A8.521 8.521 0 007.984 0h.032A8.522 8.522 0 0016 7.984v.032z" fill="url(#prefix__paint0_radial_980_20147)"/><defs><radialGradient id="prefix__paint0_radial_980_20147" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="matrix(16.1326 5.4553 -43.70045 129.2322 1.588 6.503)"><stop offset=".067" stop-color="#9168C0"/><stop offset=".343" stop-color="#5684D1"/><stop offset=".672" stop-color="#1BA1E3"/></radialGradient></defs></svg>
+                        </span>
+                        <span style="margin-left: 5px;" class="animated-gradient-text">Releasing Soon...</span>
+                    </div>
+                </div>   
+            </mat-tab>
+        </mat-tab-group>
 </div>

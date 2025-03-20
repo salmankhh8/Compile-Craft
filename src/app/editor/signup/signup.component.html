@@ -1,0 +1,71 @@
+<div class="auth-container">
+    <div class="auth-box">
+        <ng-container *ngIf="!isLoggedIn">
+            <h2>
+                <span class="sign">Sign</span>
+                <span class="dynamic" [ngClass]="{ 'sign-in': !isSignUp, 'sign-up': isSignUp }">
+                    {{ isSignUp ? 'Up' : 'In' }}
+                </span>
+            </h2>
+            <ng-container *ngIf="isSignUp">
+                <mat-form-field appearance="outline" [style.width.px]=280>
+                    <mat-label>User Name</mat-label>
+                    <input matInput placeholder="UserName">
+                </mat-form-field>
+            </ng-container>
+            <mat-form-field appearance="outline" [style.width.px]=280 class="custom-height">
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Email">
+            </mat-form-field>
+            <mat-form-field appearance="outline" [style.width.px]=280>
+                <mat-label>Password</mat-label>
+                <input matInput placeholder="Password">
+            </mat-form-field>
+            <button type="submit" class="btn">
+                {{ isSignUp ? 'Sign Up' : 'Login' }}
+            </button>
+
+            <div class="signup-buttons">
+                <button class="signup-button google btn-brands" (click)="onGoogleSignup()">
+                    {{ isSignUp ? 'Sign Up' : 'Login' }} with Google
+                    <fa-icon class="icon" [icon]="faGoogle"></fa-icon>
+                </button>
+
+                <button class="signup-button github btn-brands" (click)="onGithubSignup()">
+                    {{ isSignUp ? 'Sign Up' : 'Login' }} with GitHub
+                    <fa-icon class="icon" [icon]="faGithub"></fa-icon>
+
+                </button>
+            </div>
+            <p>
+                {{ isSignUp
+                ? 'Already have an account? '
+                : "Don't have an account? " }}
+                <a (click)="toggleAuthMode()">
+                    {{ isSignUp ? 'Sign in' : 'Sign up' }}
+                </a>
+            </p>
+        </ng-container>
+        <ng-container *ngIf="isLoggedIn">
+            <!-- {{this.userData()}} -->
+            <h2>
+                <span class="sign">Sign</span>
+                <span  class="dynamic" [ngClass]="{ 'sign-up': !isSignUp, 'sign-in': isSignUp }">&nbsp;Out</span>
+            </h2>
+            <div class="signout">
+                <button tabindex="-1" class="signup-button github btn-brands" (click)="signout(false)">
+                    Log Out
+                </button>
+            </div>
+            <div class="signout">
+                <button tabindex="-1" class="signup-button github btn-brands" (click)="signout(true)">
+                    Use Another Account
+                </button>
+            </div>
+            <!-- <div class="error" *ngIf="error_massage.message">
+                <h4 style="color: red;">{{error_massage.name}}: {{error_massage.message}}</h4>
+            </div> -->
+
+        </ng-container>
+    </div>
+</div>
