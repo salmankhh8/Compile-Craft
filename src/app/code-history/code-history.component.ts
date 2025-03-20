@@ -18,6 +18,8 @@ import { Router } from '@angular/router';
 import { ApexOptions, ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
 import ApexCharts from 'apexcharts';
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { ElipsisPipe } from '../elipsis.pipe';
+import { MatTooltip } from '@angular/material/tooltip';
 
 const matArray = [MatFormFieldModule, MatTableModule, MatSortModule, FontAwesomeModule, MatPaginatorModule, MatInputModule, CommonModule, HttpClientModule, MatListModule, MatIconModule, NgApexchartsModule, CommonModule]
 export interface LanguageData {
@@ -38,7 +40,7 @@ export type ChartOptions = {
 @Component({
   selector: 'app-code-history',
   standalone: true,
-  imports: [matArray],
+  imports: [matArray,ElipsisPipe, MatTooltip],
   templateUrl: './code-history.component.html',
   styleUrl: './code-history.component.scss',
   providers: [CodeHistoryService]
@@ -48,7 +50,7 @@ export type ChartOptions = {
 
 export class CodeHistoryComponent implements AfterViewInit, OnInit {
 [x: string]: any;
-  displayedColumns2: string[] = ['title','question', 'language', 'action'];
+  displayedColumns2: string[] = ['question','description', 'language', 'action'];
 
   dataSource2!: MatTableDataSource<codeHistoryModel>;
   trendingQuestions: trendQuestionModel[] = []

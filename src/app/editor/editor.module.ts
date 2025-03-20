@@ -22,6 +22,7 @@ import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
 import { IdleService } from './idle.service';
 import { GoogleAuthService } from '../google-auth.service';
 
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 // import {MonacoEditorModule, NgxMonacoEditorConfig} from 'ngx-monaco-editor'
 
